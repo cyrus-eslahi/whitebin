@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Checkout — WhiteBin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="checkout.css">
+</head>
+<body class="checkout-page">
+  <header class="checkout-header">
+    <a href="../message/" class="checkout-header__back" aria-label="Back">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <h1 class="checkout-header__title">Checkout</h1>
+    <span class="checkout-header__spacer" aria-hidden="true"></span>
+  </header>
+
+  <main class="checkout-main">
+    <section class="checkout-section" id="address-section">
+      <div class="checkout-section__head">
+        <h2 class="checkout-section__label">Address</h2>
+        <button type="button" class="checkout-section__edit" id="edit-address-btn" aria-label="Edit address">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 20h4l10.5-10.5a2.1 2.1 0 0 0-3-3L5 17v3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M13.5 6.5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <p class="checkout-address__empty" id="address-display">No address added yet.</p>
+      <p class="checkout-address__phone checkout-address__phone--hidden" id="phone-display"></p>
+      <p class="checkout-field-error checkout-field-error--hidden" id="address-error">Please add your address and phone number.</p>
+    </section>
+
+    <section class="checkout-section checkout-product">
+      <div class="checkout-product__thumb">
+        <img src="../trashbin.png" alt="" width="72" height="72">
+      </div>
+      <div class="checkout-product__info">
+        <p class="checkout-product__store">WhiteBin</p>
+        <p class="checkout-product__name">trash bin cleanup</p>
+        <p class="checkout-product__meta">Order ID: <span id="order-id">…</span></p>
+      </div>
+      <p class="checkout-product__price" id="checkout-price">$20</p>
+    </section>
+
+    <section class="checkout-section checkout-qty-row">
+      <span class="checkout-section__label">Quantity</span>
+      <div class="qty-stepper qty-stepper--readonly" aria-label="Quantity">
+        <span class="qty-stepper__value" id="qty-display">1</span>
+      </div>
+    </section>
+
+    <section class="checkout-section checkout-payment">
+      <h2 class="checkout-section__label checkout-payment__heading">Payment Method</h2>
+      <fieldset class="payment-options" id="payment-options">
+        <legend class="visually-hidden">Choose payment method</legend>
+
+        <label class="payment-option">
+          <input type="radio" name="payment" value="PayPal">
+          <span class="payment-option__radio"></span>
+          <span class="payment-option__icon payment-option__icon--paypal" aria-hidden="true">P</span>
+          <span class="payment-option__text">Pay with PayPal</span>
+        </label>
+
+        <label class="payment-option">
+          <input type="radio" name="payment" value="Zelle">
+          <span class="payment-option__radio"></span>
+          <span class="payment-option__icon payment-option__icon--zelle" aria-hidden="true">Z</span>
+          <span class="payment-option__text">Pay with Zelle</span>
+        </label>
+
+        <label class="payment-option">
+          <input type="radio" name="payment" value="Cash">
+          <span class="payment-option__radio"></span>
+          <span class="payment-option__icon payment-option__icon--cash" aria-hidden="true">$</span>
+          <span class="payment-option__text">Pay with Cash</span>
+        </label>
+
+        <label class="payment-option">
+          <input type="radio" name="payment" value="Crypto">
+          <span class="payment-option__radio"></span>
+          <span class="payment-option__icon payment-option__icon--crypto" aria-hidden="true">₿</span>
+          <span class="payment-option__text">Pay with Crypto</span>
+        </label>
+
+        <label class="payment-option">
+          <input type="radio" name="payment" value="CashApp">
+          <span class="payment-option__radio"></span>
+          <span class="payment-option__icon payment-option__icon--cashapp" aria-hidden="true">$</span>
+          <span class="payment-option__text">Pay with CashApp</span>
+        </label>
+      </fieldset>
+      <p class="checkout-field-error checkout-field-error--hidden" id="payment-error">Please select a payment method.</p>
+    </section>
+
+    <p class="checkout-notice">
+      Payment will be transacted after job is finished. Make sure to message
+      <a href="tel:3464421888" class="checkout-notice__phone" id="notice-phone">346-442-1888</a>
+      with your specified time and order ID.
+    </p>
+  </main>
+
+  <footer class="checkout-footer">
+    <button type="button" class="checkout-footer__submit" id="complete-order-btn">Complete Order</button>
+  </footer>
+
+  <!-- Address editor -->
+  <div class="modal-overlay modal-overlay--hidden" id="address-modal" role="dialog" aria-modal="true" aria-labelledby="address-modal-title">
+    <div class="modal-sheet">
+      <div class="modal-sheet__head">
+        <h2 id="address-modal-title">Edit address</h2>
+        <button type="button" class="modal-sheet__close" id="close-address-modal" aria-label="Close">&times;</button>
+      </div>
+      <form id="address-form" class="address-form">
+        <label class="address-form__field">
+          <span>Street address</span>
+          <textarea name="address" id="address-input" rows="3" required placeholder="Street, city, state, ZIP"></textarea>
+        </label>
+        <label class="address-form__field">
+          <span>Phone number</span>
+          <input type="tel" name="phone" id="phone-input" required placeholder="(555) 123-4567" autocomplete="tel">
+        </label>
+        <button type="submit" class="address-form__save">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Order verified -->
+  <div class="modal-overlay modal-overlay--hidden" id="success-modal" role="dialog" aria-modal="true" aria-labelledby="success-modal-title">
+    <div class="success-modal">
+      <button type="button" class="success-modal__close" id="close-success-modal" aria-label="Close">&times;</button>
+      <div class="success-modal__icon" aria-hidden="true">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+          <path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 id="success-modal-title" class="success-modal__title">Order verified!</h2>
+      <p class="success-modal__text">
+        Message
+        <button type="button" class="success-modal__copy-phone" id="copy-phone-btn">346-442-1888</button>
+        your order ID and time you would like.
+      </p>
+      <p class="success-modal__copied success-modal__copied--hidden" id="copy-feedback">Copied!</p>
+      <a href="../" class="success-modal__home">Back to home</a>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/order-service.js"></script>
+  <script src="checkout.js"></script>
+</body>
+</html>

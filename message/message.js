@@ -27,6 +27,9 @@
   });
 
   document.querySelector(".product-card__buy")?.addEventListener("click", () => {
-    /* Placeholder — checkout not implemented yet */
+    const active = document.querySelector(".qty-selector__btn.is-active");
+    const qty = active?.dataset.qty || "1";
+    sessionStorage.removeItem("whitebin_checkout_order_id");
+    window.location.href = `../checkout/?qty=${qty}`;
   });
 })();
