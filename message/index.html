@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Message — WhiteBin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="message.css">
+</head>
+<body class="message-page">
+  <div class="message-page__bg" aria-hidden="true"></div>
+
+  <header class="message-header">
+    <a href="../" class="message-header__back" aria-label="Back to home">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <h1 class="message-header__brand">WhiteBin</h1>
+    <span class="message-header__spacer" aria-hidden="true"></span>
+  </header>
+
+  <main class="message-hero">
+    <div class="message-hero__visual">
+      <div class="message-hero__bin-wrap">
+        <img src="../trashbin.png" alt="" class="message-hero__bin" width="280" height="340">
+      </div>
+      <div class="qty-selector" role="group" aria-label="Number of trash cans">
+        <button type="button" class="qty-selector__btn is-active" data-qty="1">1</button>
+        <button type="button" class="qty-selector__btn" data-qty="2">2</button>
+      </div>
+    </div>
+  </main>
+
+  <section class="product-card" aria-label="Order details">
+    <h2 class="product-card__title" id="product-title">Clean 1 Trash Can</h2>
+    <div class="product-card__row">
+      <p class="product-card__price" id="product-price">$20</p>
+    </div>
+    <button type="button" class="product-card__buy">Buy Now</button>
+  </section>
+
+  <script src="message.js"></script>
+</body>
+</html>

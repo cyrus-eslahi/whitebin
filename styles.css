@@ -193,8 +193,8 @@ main {
   z-index: 0;
   top: 50%;
   left: 50%;
-  width: min(480px, 82vw);
-  height: min(480px, 82vw);
+  width: min(600px, 102.5vw);
+  height: min(600px, 102.5vw);
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: radial-gradient(
